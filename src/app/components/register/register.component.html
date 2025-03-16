@@ -1,0 +1,49 @@
+<div class="w-full h-screen flex items-center justify-center">
+    <div class="w-[75%] h-[75%] shadow-lg rounded-lg flex flex-row gap-2">
+        <div class="w-[50%] flex items-center flex-col gap-2 p-3">
+            <h1 class="text-xl font-bold">Créer un compte</h1>
+            <div class="w-full flex items-center justify-center">
+                <form class="w-1/2 flex flex-col gap-2" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                    <div class="w-full">
+                        <p-floatlabel variant="on">
+                            <input class="w-full" pInputText formControlName="email" autocomplete="off" />
+                            <label>Email</label>
+                        </p-floatlabel>
+                    </div>
+                    <div class="w-full">
+                        <p-floatlabel variant="on">
+                            <input class="w-full" pInputText formControlName="username" autocomplete="off" />
+                            <label>Nom d'utilisateur</label>
+                        </p-floatlabel>
+                    </div>
+                    <div class="w-full">
+                        <p-floatlabel variant="on">
+                            <input class="w-full" pInputText formControlName="name" autocomplete="off" />
+                            <label>Nom</label>
+                        </p-floatlabel>
+                    </div>
+                    <div class="w-full">
+                        <p-floatlabel variant="on">
+                            <input class="w-full" pInputText formControlName="firstname" autocomplete="off" />
+                            <label>Prénom</label>
+                        </p-floatlabel>
+                    </div>
+                    <div class="w-full">
+                        <input class="w-full" pInputText formControlName="birthdate" type="date" />
+                    </div>
+                    <div class="w-full">
+                        <p-floatlabel variant="on">
+                            <input class="w-full" pInputText type="password" formControlName="password"
+                                autocomplete="off" />
+                            <label>Mot de passe</label>
+                        </p-floatlabel>
+                    </div>
+                    <p-button label="S'inscrire" class="w-full" [disabled]="registerForm.invalid" type="submit" />
+                </form>
+            </div>
+        </div>
+        <div class="w-[50%] rounded-lg h-full overflow-hidden">
+            <img src="/man-362150_1280.jpg" class="w-[120%] h-full" alt="Tsy hita">
+        </div>
+    </div>
+</div>
