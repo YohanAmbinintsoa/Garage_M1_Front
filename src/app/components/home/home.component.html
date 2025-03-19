@@ -1,5 +1,10 @@
-<section class="w-full flex items-center ">
-    <div class="shadow-lg p-2 rounded w-full">
-        <h1 class="text-xl">Bienvenue Admin!</h1>
+<section class="w-full grid grid-cols-2">
+    <div class="shadow-lg p-2 rounded">
+        <app-dynamic-crud [title]="'modeles'" [endpoint]="'carModels'" [fields]="carModel">
+        </app-dynamic-crud>
+    </div>
+    <div class="shadow-lg p-2 rounded">
+        <app-dynamic-crud [title]="'marques'" [endpoint]="'carBrands'" [fields]="carBrand">
+        </app-dynamic-crud>
     </div>
 </section>

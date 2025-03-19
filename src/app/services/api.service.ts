@@ -8,7 +8,7 @@ import { MessageService } from 'primeng/api';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:5000'; // 🔹 Change this to your API URL
+  private baseUrl = 'http://localhost:5000'; 
 
   constructor(private http: HttpClient, private messageService: MessageService) {}
 
@@ -17,6 +17,10 @@ export class ApiService {
     return this.http.get<T>(`${this.baseUrl}/${endpoint}`).pipe(
       catchError(error => this.handleError(error))
     );
+  }
+
+  getById(endpoint: string, id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${endpoint}/${id}`);
   }
 
   /** POST request */
@@ -38,6 +42,22 @@ export class ApiService {
     return this.http.delete<T>(`${this.baseUrl}/${endpoint}`).pipe(
       catchError(error => this.handleError(error))
     );
+  }
+
+  getAll(endpoint: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${endpoint}`);
+  }
+
+  create(endpoint: string, data: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/${endpoint}`, data);
+  }
+
+  update(endpoint: string, id: number, data: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/${endpoint}/${id}`, data);
+  }
+
+  deleteIt(endpoint: string, id: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${endpoint}/${id}`);
   }
 
   /** Handle API errors and show toast notifications */

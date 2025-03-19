@@ -7,11 +7,12 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import MyPreset from './MyPreset';
 import { MessageService } from 'primeng/api';
+import { CookieService } from 'ngx-cookie-service';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
-  provideRouter(routes), provideHttpClient(), MessageService, provideAnimationsAsync(),
+  provideRouter(routes), provideHttpClient(), MessageService, provideAnimationsAsync(), CookieService,
   providePrimeNG({
     theme: {
       preset: MyPreset,

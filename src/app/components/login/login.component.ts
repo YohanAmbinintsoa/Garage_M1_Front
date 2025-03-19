@@ -6,13 +6,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ApiService } from '../../services/api.service';
-import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { TooltipModule } from 'primeng/tooltip';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-login',
-  imports: [InputTextModule,ButtonModule,FloatLabelModule,ReactiveFormsModule, CommonModule,ToastModule],
+  imports: [InputTextModule, ButtonModule, FloatLabelModule, ReactiveFormsModule, CommonModule, ToastModule, TooltipModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -22,17 +24,19 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required])
   });
 
-  errorMessage: string =""
+  errorMessage: string = ""
 
-  constructor(private http: HttpClient, private apiService: ApiService, private messageService: MessageService) {}
+  constructor(private http: HttpClient, private router: Router,private cookieService: CookieService) { }
 
   onSubmit() {
     if (this.userForm.valid) {
       this.http.post('http://localhost:5000/auth/login', this.userForm.value)
         .subscribe({
           next: (response: any) => {
-            localStorage.setItem('token', response.token);
+            this.cookieService.set('token', response.token);
+            
             console.log('Login successful!', response);
+            this.router.navigate(['/home']);
           },
           error: (err) => {
             this.errorMessage = err.error.message;

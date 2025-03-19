@@ -1,0 +1,92 @@
+<div class="w-full p-2 overflow-x-scroll">
+  <div class="rounded-lg ">
+    <p-table showGridlines [value]="dataList" class="w-full" >
+      <ng-template pTemplate="caption">
+        <div class="flex items-center justify-between">
+          <span class="text-xl font-bold">Gestion des {{ title }}</span>
+          <p-button icon="pi pi-plus" rounded raised (click)="showInsertDialog()"></p-button>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let field of fields" pSortableColumn="{{field.name}}">{{ capitalizeFirstLetter(field.name) }}
+            <p-sortIcon field="{{field.name}}" /></th>
+            <th></th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-item>
+        <tr>
+          <td *ngFor="let field of fields" [ngClass]="getFieldClass(item[field.name])">
+            {{ formatField(item, field) || "N/A" }}
+          </td>
+          <td class="grid grid-cols-2 gap-2">
+            <button (click)="showEditDialog(item)"><i class="pi pi-pencil"></i></button>
+            <button (click)="deleteItem(item.id)"><i class="pi pi-trash"></i></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #emptymessage>
+        <tr>
+          <td [attr.colspan]="(fields.length || 0) + 1" class="text-center">Pas de données.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="dataList.length"
+    [rowsPerPageOptions]="[10, 20, 30]" />
+</div>
+
+<!-- Add form -->
+<p-dialog [(visible)]="visibleInsert" [modal]="true" [style]="{ width: '25rem' }">
+  <ng-template #header>
+    <div class="inline-flex items-center justify-center gap-2">
+      <span class="font-bold whitespace-nowrap">Inserer un(e) {{title}}</span>
+    </div>
+  </ng-template>
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <div *ngFor="let field of fields; trackBy: trackByFn" class="flex items-center gap-4 mb-4">
+      <label for="{{ field.name }}" class="font-semibold w-24">{{ capitalizeFirstLetter(field.name) }}</label>
+      <input *ngIf="field.type !== 'select' && field.type !== 'boolean'" pInputText id="{{ field.name }}"
+        class="flex-auto" [type]="field.type" [formControlName]="field.name" autocomplete="off" />
+
+      
+      <input *ngIf="field.type === 'boolean'" type="checkbox" [formControlName]="field.name" />
+
+      
+      <!-- <select *ngIf="field.type === 'select'" id="{{ field.name }}" class="flex-auto p-2 border rounded"
+        [formControlName]="field.name">
+        <option *ngFor="let option of selectOptions[field.name]" [value]="option.value">
+          {{ option[field.accessor] }}
+        </option>
+      </select> -->
+      <p-select *ngIf="field.type === 'select'" [options]="selectOptions[field.name]" [formControlName]="field.name" optionLabel="name" attr.placeholder="{{field.name}}" />
+    </div>
+  </form>
+  <ng-template #footer>
+    <p-button label="Cancel" [text]="true" severity="secondary" (click)="visibleInsert = false" />
+    <p-button label="Inserer" [outlined]="true" severity="secondary" (click)="submitForm()" />
+  </ng-template>
+</p-dialog>
+
+<!-- Update form -->
+<p-dialog [(visible)]="visibleEdit" [modal]="true" [style]="{ width: '25rem' }">
+  <ng-template #header>
+    <div class="inline-flex items-center justify-center gap-2">
+      <span class="font-bold whitespace-nowrap">Modifier {{ title }}</span>
+    </div>
+  </ng-template>
+  <form [formGroup]="editForm" (ngSubmit)="updateItem()">
+    <div *ngFor="let field of fields; trackBy: trackByFn" class="flex items-center gap-4 mb-4">
+      <label for="{{ field.name }}" class="font-semibold w-24">{{ capitalizeFirstLetter(field.name) }}</label>
+      <input *ngIf="field.type !== 'boolean'" pInputText id="{{ field.name }}" class="flex-auto" [type]="field.type"
+        [formControlName]="field.name" autocomplete="off" />
+      <input *ngIf="field.type === 'boolean'" type="checkbox" [formControlName]="field.name" />
+    </div>
+  </form>
+  <ng-template #footer>
+    <p-button label="Cancel" [text]="true" severity="secondary" (click)="visibleEdit = false" />
+    <p-button label="Update" [outlined]="true" severity="secondary" (click)="updateItem()" />
+  </ng-template>
+</p-dialog>

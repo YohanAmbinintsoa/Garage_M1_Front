@@ -1,33 +1,41 @@
 <div class="w-full h-screen flex items-center justify-center">
     <div class="w-[75%] h-[75%] shadow-lg rounded-lg flex flex-row gap-2">
-        <div class="w-[50%] flex items-center flex-col gap-2 p-3">
-            <h1 class="text-xl font-bold">Se connecter</h1>
-            <div class="w-full flex items-center justify-center">
-                <form class="w-1/2 flex flex-col gap-2" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="w-[50%] flex justify-center items-center flex-col gap-5 p-3">
+            <div class="w-2/3">
+                <h1 class="text-4xl">Se connecter</h1>
+                <p class="font-light">Veuillez-vous connecter pour continuer.</p>
+            </div>
+            <div class="w-full flex items-center justify-center flex-col gap-4">
+                <form class="w-2/3 flex flex-col gap-2" [formGroup]="userForm" (ngSubmit)="onSubmit()">
                     <div class="w-full">
-                        <p-floatlabel variant="on">
-                            <input class="w-full" pInputText formControlName="email" autocomplete="off" />
-                            <label>Email</label>
+                        <p-floatlabel class="relative" variant="on">
+                            <input class="w-full rounded-lg" pInputText formControlName="email" autocomplete="off" />
+                            <label class="font-light">Email</label>
+                            <i class="pi pi-exclamation-circle absolute text-red-500 right-3 top-1/2 -translate-y-1/2"
+                                *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched"
+                                pTooltip="Entrez votre adresse email" tooltipPosition="right" placeholder="Right"></i>
                         </p-floatlabel>
-                        <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
-                            <p>Email requis !</p>
-                        </div>
                     </div>
                     <div class="w-full">
-                        <p-floatlabel variant="on">
+                        <p-floatlabel class="relative" variant="on">
                             <input class="w-full" pInputText type="password" formControlName="password"
                                 autocomplete="off" />
                             <label>Mot de passe</label>
+                            <i class="pi pi-exclamation-circle absolute text-red-500 right-3 top-1/2 -translate-y-1/2"
+                                *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched"
+                                pTooltip="Entrez votre mot de passe" tooltipPosition="right" placeholder="Right"></i>
                         </p-floatlabel>
-                        <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
-                            <p>Mot de passe requis ! </p>
-                        </div>
+
                     </div>
-                    <p-button label="Submit" class="w-full" [disabled]="userForm.invalid" type="submit" />
+                    <p-button label="Se connecter" class="w-full" [disabled]="userForm.invalid" type="submit" />
                 </form>
+                <p>Pas encore de compte? <a class="text-blue-500" href="">S'inscrire</a></p>
             </div>
         </div>
-        <div class="w-[50%] rounded-lg h-full overflow-hidden">
+        <div class="w-[50%] relative rounded-lg h-full overflow-hidden">
+            <div class="absolute  inset-0 bg-[rgba(128,128,128,0.5)] w-full h-full top-0 p-3 flex items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+                <h1 class="text-white font-bold text-2xl">M1 MEAN Yohan - Mahery</h1>
+            </div>
             <img src="/man-362150_1280.jpg" class="w-[120%] h-full" alt="Tsy hita">
         </div>
     </div>
