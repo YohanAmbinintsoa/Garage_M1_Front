@@ -5,6 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ButtonModule } from 'primeng/button';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -30,7 +31,7 @@ export class RegisterComponent {
 
   onRegister() {
     if (this.registerForm.valid) {
-      this.http.post('http://localhost:5000/auth/register', this.registerForm.value)
+      this.http.post(environment.API_URL+'/auth/register', this.registerForm.value)
         .subscribe({
           next: (response: any) => {
             localStorage.setItem('token', response.token);

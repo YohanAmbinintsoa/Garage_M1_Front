@@ -10,6 +10,7 @@ import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -30,11 +31,10 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.userForm.valid) {
-      this.http.post('http://localhost:5000/auth/login', this.userForm.value)
+      this.http.post(environment.API_URL+'/auth/login', this.userForm.value)
         .subscribe({
           next: (response: any) => {
             this.cookieService.set('token', response.token);
-            
             console.log('Login successful!', response);
             this.router.navigate(['/home']);
           },

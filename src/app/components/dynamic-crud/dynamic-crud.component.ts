@@ -19,7 +19,7 @@ import { SelectModule } from 'primeng/select';
   templateUrl: './dynamic-crud.component.html',
   styleUrls: ['./dynamic-crud.component.css'],
   imports: [CommonModule, ReactiveFormsModule, TableModule, ButtonModule, PaginatorModule, DialogModule,
-    FloatLabelModule, InputTextModule,ToastModule, ConfirmDialogModule, IconField, InputIcon, SelectModule
+    FloatLabelModule, InputTextModule,ToastModule, ConfirmDialogModule, SelectModule
   ]
 })
 export class DynamicCrudComponent implements OnInit {
