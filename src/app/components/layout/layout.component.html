@@ -1,10 +1,16 @@
-<div class="layout">
+<div class="layout bg-gray-200">
     <app-header></app-header>
 
     <div class="content">
         <app-sidebar></app-sidebar>
 
-        <main class="main-content">
+        <main class="p-2 w-full">
+            <div class="flex flex-row justify-between items-center w-full p-2 mb-5">
+                <div>
+                    <h2>Votre garage à portée de main.</h2>
+                    <h1 class="text-4xl">Bienvenue chez vous.</h1>
+                </div>
+            </div>
             <router-outlet></router-outlet>
         </main>
     </div>

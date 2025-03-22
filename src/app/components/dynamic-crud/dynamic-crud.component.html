@@ -1,38 +1,44 @@
-<div class="w-full p-2 overflow-x-scroll">
-  <div class="rounded-lg ">
-    <p-table showGridlines [value]="dataList" class="w-full" >
-      <ng-template pTemplate="caption">
-        <div class="flex items-center justify-between">
-          <span class="text-xl font-bold">Gestion des {{ title }}</span>
-          <p-button icon="pi pi-plus" rounded raised (click)="showInsertDialog()"></p-button>
-        </div>
-      </ng-template>
-
-      <ng-template pTemplate="header">
-        <tr>
-          <th *ngFor="let field of fields" pSortableColumn="{{field.name}}">{{ capitalizeFirstLetter(field.name) }}
-            <p-sortIcon field="{{field.name}}" /></th>
-            <th></th>
-        </tr>
-      </ng-template>
-
-      <ng-template pTemplate="body" let-item>
-        <tr>
-          <td *ngFor="let field of fields" [ngClass]="getFieldClass(item[field.name])">
-            {{ formatField(item, field) || "N/A" }}
-          </td>
-          <td class="grid grid-cols-2 gap-2">
-            <button (click)="showEditDialog(item)"><i class="pi pi-pencil"></i></button>
-            <button (click)="deleteItem(item.id)"><i class="pi pi-trash"></i></button>
-          </td>
-        </tr>
-      </ng-template>
-      <ng-template #emptymessage>
-        <tr>
-          <td [attr.colspan]="(fields.length || 0) + 1" class="text-center">Pas de données.</td>
-        </tr>
-      </ng-template>
-    </p-table>
+<div class="w-full p-2 bg-gray-100 rounded-xl">
+  <div class="flex flex-col gap-2">
+    <div class="flex items-center justify-between">
+      <span class="text-xl font-bold">Gestion des {{ title }}</span>
+      <p-button icon="pi pi-plus" rounded raised (click)="showInsertDialog()"></p-button>
+    </div>
+    <div class="rounded-xl border">
+      <p-table [value]="dataList" [tableStyle]="{ 'min-height': '150px', 'border-radius':'12px' }" class="w-full" >
+        <!-- <ng-template pTemplate="caption">
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-bold">Gestion des {{ title }}</span>
+            <p-button icon="pi pi-plus" rounded raised (click)="showInsertDialog()"></p-button>
+          </div>
+        </ng-template> -->
+  
+        <ng-template pTemplate="header">
+          <tr>
+            <th *ngFor="let field of fields" pSortableColumn="{{field.name}}">{{ capitalizeFirstLetter(field.name) }}
+              <p-sortIcon field="{{field.name}}" /></th>
+              <th></th>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td *ngFor="let field of fields" [ngClass]="getFieldClass(item[field.name])">
+              {{ formatField(item, field) || "N/A" }}
+            </td>
+            <td class="grid grid-cols-2 gap-2">
+              <button (click)="showEditDialog(item)"><i class="pi pi-pencil"></i></button>
+              <button (click)="deleteItem(item.id)"><i class="pi pi-trash"></i></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template #emptymessage>
+          <tr>
+            <td [attr.colspan]="(fields.length || 0) + 1" class="text-center">Pas de données.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
   </div>
   <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="dataList.length"
     [rowsPerPageOptions]="[10, 20, 30]" />

@@ -3,12 +3,14 @@ import { CookieService } from 'ngx-cookie-service';
 import { roleRoutes } from '../../constants/RoleRoutes';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { TooltipModule } from 'primeng/tooltip';
+
 
 type Role = keyof typeof roleRoutes;
 
 @Component({
   selector: 'app-sidebar',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TooltipModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
