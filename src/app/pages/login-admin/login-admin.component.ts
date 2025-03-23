@@ -12,27 +12,27 @@ import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../../environments/environment';
 
-
 @Component({
-  selector: 'app-login',
-  imports: [InputTextModule, ButtonModule, FloatLabelModule, ReactiveFormsModule, CommonModule, ToastModule, TooltipModule, RouterLink],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  selector: 'app-login-admin',
+  imports: [InputTextModule, ButtonModule, FloatLabelModule, ReactiveFormsModule, CommonModule, ToastModule, TooltipModule],
+  templateUrl: './login-admin.component.html',
+  styleUrl: './login-admin.component.css'
 })
-export class LoginComponent {
+export class LoginAdminComponent {
+
+  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) { }
+
   userForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
-    role : new FormControl(0)
+    role : new FormControl(10)
   });
 
   errorMessage: string = ""
 
-  constructor(private http: HttpClient, private router: Router,private cookieService: CookieService) { }
-
   onSubmit() {
     if (this.userForm.valid) {
-      this.http.post(environment.API_URL+'/auth/login', this.userForm.value)
+      this.http.post(environment.API_URL + '/auth/login', this.userForm.value)
         .subscribe({
           next: (response: any) => {
             this.cookieService.set('token', response.token);

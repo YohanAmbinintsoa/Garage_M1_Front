@@ -69,14 +69,15 @@ export class DynamicCrudComponent implements OnInit {
     this.fields.forEach(field => {
       if (field.type === 'select' && field.optionsEndpoint) {
         this.apiService.getAll(field.optionsEndpoint).subscribe(response => {
-          if (response.data && Array.isArray(response.data)) {
-            this.selectOptions[field.name] = response.data.map((item: any) => ({
-              label: item[field.accessor], // Use accessor to determine the displayed text
-              value: item.id // Assuming `id` is the unique identifier, change if necessary
+          if (response && Array.isArray(response)) {
+            this.selectOptions[field.name] = response.map((item: any) => ({
+              label: item[field.accessor], 
+              value: item._id 
             }));
           } else {
-            this.selectOptions[field.name] = []; // Handle empty or invalid response
+            this.selectOptions[field.name] = [];
           }
+          console.log(this.selectOptions[field.name])
         });
       }
     });

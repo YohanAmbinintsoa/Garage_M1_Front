@@ -1,9 +1,9 @@
 <div class="w-full h-screen flex items-center justify-center">
-    <div class="w-[75%] h-[75%] shadow-lg rounded-lg flex flex-row gap-2">
-        <div class="w-[50%] flex justify-center items-center flex-col gap-5 p-3">
+    <div class="w-[50%] h-[75%] shadow-lg rounded-lg flex flex-row justify-center items-center gap-2">
+        <div class="w-[80%] flex justify-center items-center flex-col gap-5 p-3">
             <div class="w-2/3">
-                <h1 class="text-4xl">Se connecter</h1>
-                <p class="font-light">Veuillez-vous connecter pour continuer.</p>
+                <h1 class="text-4xl">Se connecter en mécano</h1>
+                <p class="font-light">Entrez vos identifiants mécaniciens.</p>
             </div>
             <div class="w-full flex items-center justify-center flex-col gap-4">
                 <form class="w-2/3 flex flex-col gap-2" [formGroup]="userForm" (ngSubmit)="onSubmit()">
@@ -29,18 +29,7 @@
                     </div>
                     <p-button label="Se connecter" class="w-full" [disabled]="userForm.invalid" type="submit" />
                 </form>
-                <p>Pas encore de compte? <a class="text-blue-500" routerLink="/register" >S'inscrire</a></p>
             </div>
-        </div>
-        <div class="w-[50%] relative rounded-lg h-full overflow-hidden">
-            <div class="absolute  inset-0 bg-[rgba(128,128,128,0.5)] w-full h-full top-0 p-3 flex items-center justify-center flex-col opacity-0 transition-opacity duration-300 hover:opacity-100">
-                <h1 class="text-white font-bold text-2xl">M1 MEAN Yohan - Mahery</h1>
-                <div class="flex justify-center items-center gap-2">
-                    <a routerLink="/loginAdmin" class="border rounded text-white p-2 hover:bg-white hover:text-black">Administrateur</a>
-                    <a routerLink="/loginMecano" class="border rounded text-white p-2 hover:bg-white hover:text-black">Mécanicien</a>
-                </div>
-            </div>
-            <img src="/man-362150_1280.jpg" class="w-[120%] h-full" alt="Tsy hita">
         </div>
     </div>
 </div>
