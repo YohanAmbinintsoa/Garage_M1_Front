@@ -4,6 +4,7 @@ import { roleRoutes } from '../../constants/RoleRoutes';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TooltipModule } from 'primeng/tooltip';
+import { AuthService } from '../../services/auth.service';
 
 
 type Role = keyof typeof roleRoutes;
@@ -15,11 +16,11 @@ type Role = keyof typeof roleRoutes;
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
-  constructor(private cookieService: CookieService) { }
+  constructor(private authService : AuthService) { }
   links: any[] = [];
 
   ngOnInit() {
-    const role = this.cookieService.get('role') as Role;
-    this.links=this.links = roleRoutes[role] || roleRoutes['user'];
+    console.log(this.authService.getUserRole() as Role)
+    this.links = roleRoutes[this.authService.getUserRole() as Role] || roleRoutes['user'];
   }
 }

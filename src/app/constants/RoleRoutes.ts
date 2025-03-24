@@ -6,8 +6,8 @@ interface RoleRoutes {
   
   export const roleRoutes: RoleRoutes = {
     admin: [
-      { name: 'Accueil', icon: "pi pi-home", route:"/home" },
-      { name: 'Parametrages', icon:"pi pi-cog", route:""},
+      { name: 'Accueil', icon: "pi pi-home", route:"/admin/home" },
+      { name: 'Parametrages', icon:"pi pi-cog", route:"/admin/settings"},
       { name: 'Clients', icon:"pi pi-user", route:"" }
     ],
     mecano: [], 

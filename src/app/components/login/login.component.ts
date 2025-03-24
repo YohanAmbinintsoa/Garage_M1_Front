@@ -36,6 +36,7 @@ export class LoginComponent {
         .subscribe({
           next: (response: any) => {
             this.cookieService.set('token', response.token);
+            this.cookieService.set('role', response.user.role);
             console.log('Login successful!', response);
             this.router.navigate(['/home']);
           },

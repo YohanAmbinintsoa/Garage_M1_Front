@@ -38,7 +38,7 @@
 </div>
 
 <!-- Add form -->
-<p-dialog [(visible)]="visibleInsert" [modal]="true" [style]="{ width: '25rem' }">
+<p-dialog [(visible)]="visibleInsert" [modal]="true" [style]="{ width: '50rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
   <ng-template #header>
     <div class="inline-flex items-center justify-center gap-2">
       <span class="font-bold whitespace-nowrap">Inserer un(e) {{title}}</span>
@@ -60,14 +60,14 @@
 </p-dialog>
 
 <!-- Update form -->
-<p-dialog [(visible)]="visibleEdit" [modal]="true" [style]="{ width: '25rem' }">
+<p-dialog [(visible)]="visibleEdit" [modal]="true" class="w-1/2" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
   <ng-template #header>
     <div class="inline-flex items-center justify-center gap-2">
       <span class="font-bold whitespace-nowrap">Modifier {{ title }}</span>
     </div>
   </ng-template>
-  <form [formGroup]="editForm" (ngSubmit)="updateItem()">
-    <div *ngFor="let field of fields; trackBy: trackByFn" class="flex items-center gap-4 mb-4">
+  <form [formGroup]="editForm" (ngSubmit)="updateItem()" class="p-2">
+    <div *ngFor="let field of fields; trackBy: trackByFn" class="flex items-center gap-4 mb-4 ">
       <label for="{{ field.name }}" class="font-semibold w-24">{{ capitalizeFirstLetter(field.name) }}</label>
       <input *ngIf="field.type !== 'boolean'" pInputText id="{{ field.name }}" class="flex-auto" [type]="field.type"
         [formControlName]="field.name" autocomplete="off" />

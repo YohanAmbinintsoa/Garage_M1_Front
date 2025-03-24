@@ -36,8 +36,9 @@ export class LoginAdminComponent {
         .subscribe({
           next: (response: any) => {
             this.cookieService.set('token', response.token);
+            this.cookieService.set('role', response.user.role);
             console.log('Login successful!', response);
-            this.router.navigate(['/home']);
+            this.router.navigate(['/admin/home']);
           },
           error: (err) => {
             this.errorMessage = err.error.message;

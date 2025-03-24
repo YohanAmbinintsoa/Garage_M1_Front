@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { DynamicCrudComponent } from '../dynamic-crud/dynamic-crud.component';
-import { carBrand, carModel } from '../../constants/BackendModels';
+import { DynamicCrudComponent } from '../../../components/dynamic-crud/dynamic-crud.component';
+import { carBrand, carModel } from '../../../constants/BackendModels';
 
 @Component({
   selector: 'app-home',
