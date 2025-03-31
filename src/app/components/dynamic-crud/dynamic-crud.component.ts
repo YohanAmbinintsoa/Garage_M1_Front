@@ -19,7 +19,7 @@ import { SelectModule } from 'primeng/select';
   templateUrl: './dynamic-crud.component.html',
   styleUrls: ['./dynamic-crud.component.css'],
   imports: [CommonModule, ReactiveFormsModule, TableModule, ButtonModule, PaginatorModule, DialogModule,
-    FloatLabelModule, InputTextModule,ToastModule, ConfirmDialogModule, SelectModule
+    FloatLabelModule, InputTextModule, ToastModule, ConfirmDialogModule, SelectModule
   ]
 })
 export class DynamicCrudComponent implements OnInit {
@@ -41,7 +41,7 @@ export class DynamicCrudComponent implements OnInit {
   visibleEdit = false;
   selectedItem: any = null;
 
-  constructor(private fb: FormBuilder, private apiService: ApiService) {}
+  constructor(private fb: FormBuilder, private apiService: ApiService) { }
 
   ngOnInit() {
     this.initializeForms();
@@ -71,8 +71,8 @@ export class DynamicCrudComponent implements OnInit {
         this.apiService.getAll(field.optionsEndpoint).subscribe(response => {
           if (response && Array.isArray(response)) {
             this.selectOptions[field.name] = response.map((item: any) => ({
-              label: item[field.accessor], 
-              value: item._id 
+              label: item[field.accessor],
+              value: item._id
             }));
           } else {
             this.selectOptions[field.name] = [];
@@ -93,8 +93,8 @@ export class DynamicCrudComponent implements OnInit {
     this.updatePaginatedData();
   }
 
-  formatField(item:any, field: any): string {
-    let value=this.getDisplayValue(item, field)
+  formatField(item: any, field: any): string {
+    let value = this.getDisplayValue(item, field)
     if (typeof value === 'number') {
       return new Intl.NumberFormat('fr-FR', { minimumFractionDigits: 2 }).format(value);
     } else if (this.isDate(value)) {
@@ -152,7 +152,7 @@ export class DynamicCrudComponent implements OnInit {
         this.visibleInsert = false;
       });
     }
-    this.visibleInsert=false;
+    this.visibleInsert = false;
   }
 
   showEditDialog(item: any) {
@@ -180,7 +180,7 @@ export class DynamicCrudComponent implements OnInit {
   }
 
   trackByFn(index: number, item: any) {
-    return item._id; 
+    return item._id;
   }
 
   capitalizeFirstLetter(text: string): string {

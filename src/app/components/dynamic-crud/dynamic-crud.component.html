@@ -1,4 +1,4 @@
-<div class="w-full p-4 bg-gray-100 rounded-xl">
+<div class="w-full p-4 bg-white rounded-xl">
   <div class="flex flex-col gap-2">
     <div class="flex items-center justify-between">
       <span class="text-xl font-bold">Gestion des {{ title }}</span>
@@ -69,9 +69,10 @@
   <form [formGroup]="editForm" (ngSubmit)="updateItem()" class="p-2">
     <div *ngFor="let field of fields; trackBy: trackByFn" class="flex items-center gap-4 mb-4 ">
       <label for="{{ field.name }}" class="font-semibold w-24">{{ capitalizeFirstLetter(field.name) }}</label>
-      <input *ngIf="field.type !== 'boolean'" pInputText id="{{ field.name }}" class="flex-auto" [type]="field.type"
+      <input *ngIf="field.type !== 'select' && field.type !== 'boolean'" pInputText id="{{ field.name }}" class="flex-auto" [type]="field.type"
         [formControlName]="field.name" autocomplete="off" />
       <input *ngIf="field.type === 'boolean'" type="checkbox" [formControlName]="field.name" />
+      <p-select class="w-full" *ngIf="field.type === 'select'" [ngModel]="selectOptions[field.name]"  [formControlName]="field.name" optionValue="value" optionLabel="label" placeholder="{{field.name}}" />
     </div>
   </form>
   <ng-template #footer>
