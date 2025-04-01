@@ -11,6 +11,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../../environments/environment';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login-mecano',
@@ -19,7 +20,7 @@ import { environment } from '../../../environments/environment';
   styleUrl: './login-mecano.component.css'
 })
 export class LoginMecanoComponent {
-  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
 
   userForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -34,8 +35,7 @@ export class LoginMecanoComponent {
       this.http.post(environment.API_URL + '/auth/login', this.userForm.value)
         .subscribe({
           next: (response: any) => {
-            this.cookieService.set('token', response.token);
-            this.cookieService.set('role', response.user.role);
+            this.authService.setUser(response);
             console.log('Login successful!', response);
             this.router.navigate(['/home']);
           },

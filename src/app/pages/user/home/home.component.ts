@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DynamicCrudComponent } from '../../../components/dynamic-crud/dynamic-crud.component';
-import { carBrand, carModel } from '../../../constants/BackendModels';
+import { car } from '../../../constants/BackendModels';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +9,5 @@ import { carBrand, carModel } from '../../../constants/BackendModels';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  carBrand : any[] = carBrand;
-  carModel : any[] = carModel;
+  car : any[] = car;
 }

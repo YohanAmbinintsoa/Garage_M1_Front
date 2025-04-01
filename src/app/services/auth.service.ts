@@ -29,4 +29,20 @@ export class AuthService {
     }
     return this.userRole; 
   }
+
+  setUser(response : any){
+    this.cookie.set('token', response.token);
+    this.cookie.set('role', response.user.role);
+    this.cookie.set('user', response.user);
+  }
+
+  getUser(){
+    return this.cookie.get("user");
+  }
+
+  logout(){
+    this.cookie.delete("token");
+    this.cookie.delete("role");
+    this.cookie.delete("user");
+  }
 }

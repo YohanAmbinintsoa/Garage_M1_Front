@@ -12,10 +12,16 @@ export const articleCategory = [
 ]
 
 export const article = [
-    { name: 'designation', accessor:'designation', type: 'text', required: true },
     { name: 'articleCategory', accessor:'designation', type: 'select', required: true, optionsEndpoint: 'articleCategories' },
+    { name: 'designation', accessor:'designation', type: 'text', required: true },
 ]
 
 export const services = [
     { name: 'designation', accessor:'designation', type: 'text', required: true },
+]
+
+export const car = [
+    { name: 'carModel', accessor:'designation', type: 'select', required: true, optionsEndpoint: 'carModels' },
+    { name: 'designation', accessor:'designation', type: 'text', required: true },
+    { name: 'year', accessor:'year', type: 'text', required: true },
 ]

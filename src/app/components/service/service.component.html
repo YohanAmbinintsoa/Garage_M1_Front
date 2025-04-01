@@ -1,0 +1,79 @@
+<p-toast></p-toast>
+
+<p-dialog [(visible)]="displayDialog" [modal]="true" [closable]="true" [dismissableMask]="true"
+    [style]="{ width: '50rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+    <ng-template pTemplate="header">
+        <div class="inline-flex items-center justify-center gap-2">
+            <span class="font-bold whitespace-nowrap">Nouveau service</span>
+        </div>
+    </ng-template>
+    <form [formGroup]="serviceForm" (ngSubmit)="submitService()">
+        <div class="flex items-center gap-4 mb-4">
+            <label for="designation" class="font-semibold w-24">Designation</label>
+            <input pInputText id="designation" class="flex-auto" type="text" formControlName="designation"
+                autocomplete="off" />
+        </div>
+        <div formArrayName="mandatoryArticles" class="flex flex-col gap-4 mb-4">
+            <div class="flex items-center gap-4">
+                <label class="font-semibold w-24">Articles</label>
+                <p-button icon="pi pi-plus" (click)="addArticle()" label="Add Article"></p-button>
+            </div>
+            <div *ngFor="let article of mandatoryArticles.controls; let i = index" [formGroupName]="i" class="flex items-center gap-4 mt-2">
+                <p-select [options]="articles" optionLabel="label" optionValue="value" formControlName="article"
+                    placeholder="Select Article" class="w-64"></p-select>
+                <input type="number" pInputText formControlName="quantity" min="1" placeholder="Quantity" class="w-24">
+                <p-button icon="pi pi-trash" styleClass="p-button-danger" (click)="removeArticle(i)"></p-button>
+            </div>
+        </div>
+    </form>
+    <ng-template pTemplate="footer">
+        <p-button label="Cancel" styleClass="p-button-text" severity="secondary" (click)="displayDialog = false"></p-button>
+        <p-button label="Inserer" styleClass="p-button-outlined" severity="secondary" (click)="submitService()"
+            [disabled]="serviceForm.invalid"></p-button>
+    </ng-template>
+</p-dialog>
+
+<!-- Services Table -->
+<div class="w-full p-4 bg-white rounded-xl">
+    <div class="flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+            <span class="text-xl font-bold">Gestion des services</span>
+            <p-button icon="pi pi-plus" rounded raised (click)="displayDialog = true"></p-button>
+        </div>
+        <div class="rounded-xl border">
+            <p-table [value]="services" [paginator]="true" [rows]="5" responsiveLayout="scroll"
+                [tableStyle]="{ 'min-height': '150px', 'border-radius':'12px' }" class="w-full">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Designation</th>
+                        <th>Articles comprises</th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-service>
+                    <tr>
+                        <td>{{ service.designation }}</td>
+                        <td>
+                            <ul>
+                                <li *ngFor="let article of service.mandatoryArticles">
+                                    {{ article.article.designation }} (x{{ article.quantity }})
+                                </li>
+                            </ul>
+                        </td>
+                        <td class="grid grid-cols-2 gap-2">
+                            <button><i class="pi pi-pencil"></i></button>
+                            <button><i class="pi pi-trash"></i></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template #emptymessage>
+                    <tr>
+                        <td [attr.colspan]="3" class="text-center">Pas de données.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+</div>

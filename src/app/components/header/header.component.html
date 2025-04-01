@@ -1,22 +1,13 @@
 <div class="p-3 px-3 flex justify-between items-center">
     <h1 class="text-xl font-bold">M1MEANP12-Yohan-Mahery</h1>
     <div class="flex flex-row gap-2">
-        <div>
-            <p-avatar size="large" image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+        <div class="cursor-pointer">
+            <p-menu #menu [model]="items" [popup]="true" />
+            <p-avatar size="large" (click)="menu.toggle($event)"  image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
         </div>
         <div>
-            <p class="font-bold">John Smith</p>
-            <p class="font-light">Project Manager</p>
+            <p class="font-bold">{{user.username || "Anonyme"}}</p>
+            <p class="font-light">{{authService.getUserRole()}}</p>
         </div>
     </div>
-    <!-- <p-menubar class="border-none">
-        <ng-template #start>
-            <h1 class="text-xl font-bold">M1MEANP12-Yohan-Mahery</h1>
-        </ng-template>
-        <ng-template #end>
-            <div class="flex items-center gap-2">
-                <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
-            </div>
-        </ng-template>
-    </p-menubar> -->
 </div>

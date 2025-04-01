@@ -11,6 +11,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../../environments/environment';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -28,16 +29,14 @@ export class LoginComponent {
 
   errorMessage: string = ""
 
-  constructor(private http: HttpClient, private router: Router,private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private router: Router,private authService: AuthService) { }
 
   onSubmit() {
     if (this.userForm.valid) {
       this.http.post(environment.API_URL+'/auth/login', this.userForm.value)
         .subscribe({
           next: (response: any) => {
-            this.cookieService.set('token', response.token);
-            this.cookieService.set('role', response.user.role);
-            console.log('Login successful!', response);
+            this.authService.setUser(response);
             this.router.navigate(['/home']);
           },
           error: (err) => {
