@@ -1,0 +1,36 @@
+<!-- Services Table -->
+<div class="w-full p-4 bg-white rounded-xl">
+    <div class="flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+            <span class="text-xl font-bold">Liste des services</span>
+        </div>
+        <div class="rounded-xl border">
+            <p-table [value]="services" [paginator]="true" [rows]="5" responsiveLayout="scroll"
+                [tableStyle]="{ 'min-height': '150px', 'border-radius':'12px' }" class="w-full">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Date</th>
+                        <th>Client</th>
+                        <th>Service</th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-service>
+                    <tr>
+                        <td>{{ service.date }}</td>
+                        <td>{{ service.client }}</td>
+                        <td>{{ service.service }}</td>
+                        <td><a [routerLink]="['/mecano/details-service', 1758]">Go to Home</a></td>
+                    </tr>
+                </ng-template>
+                <ng-template #emptymessage>
+                    <tr>
+                        <td [attr.colspan]="3" class="text-center">Pas de données.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+</div>

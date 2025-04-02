@@ -31,7 +31,8 @@ export class LoginMecanoComponent {
   errorMessage: string = ""
 
   onSubmit() {
-    if (this.userForm.valid) {
+    this.router.navigate(['/mecano/home']);
+/*    if (this.userForm.valid) {
       this.http.post(environment.API_URL + '/auth/login', this.userForm.value)
         .subscribe({
           next: (response: any) => {
@@ -43,6 +44,6 @@ export class LoginMecanoComponent {
             this.errorMessage = err.error.message;
           }
         });
-    }
+    }*/
   }
 }

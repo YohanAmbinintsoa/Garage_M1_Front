@@ -10,7 +10,10 @@ interface RoleRoutes {
       { name: 'Parametrages', icon:"pi pi-cog", route:"/admin/settings"},
       { name: 'Clients', icon:"pi pi-user", route:"" }
     ],
-    mecano: [], 
+    mecano: [
+      { name: 'Accueil', icon:"pi pi-home", route:"/mecano/home" },
+      { name: 'Details-service', icon:"pi pi-briefcase", route:"/mecano/details-service/:id" },
+    ], 
     user: [
       { name: 'Accueil', icon:"pi pi-home", route:"/home" },
       { name: 'Services', icon:"pi pi-briefcase", route:"" },
