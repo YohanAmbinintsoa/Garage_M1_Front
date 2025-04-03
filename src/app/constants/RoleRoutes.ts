@@ -8,7 +8,9 @@ interface RoleRoutes {
     admin: [
       { name: 'Accueil', icon: "pi pi-home", route:"/admin/home" },
       { name: 'Parametrages', icon:"pi pi-cog", route:"/admin/settings"},
-      { name: 'Clients', icon:"pi pi-user", route:"" }
+      { name: 'Clients', icon:"pi pi-user", route:"" },
+      { name: 'Stock', icon:"pi pi-user", route:"/admin/stock/actual" },
+      
     ],
     mecano: [], 
     user: [

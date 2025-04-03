@@ -10,6 +10,8 @@ import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.componen
 import { AdminSettingsComponent } from './pages/admin/admin-settings/admin-settings.component';
 import { HomeComponent } from './pages/user/home/home.component';
 import { SettingsComponent } from './pages/user/settings/settings.component';
+import { StockActualComponent } from './pages/admin/admin-stock/stock-actual/stock-actual.component';
+import { StockMvtComponent } from './pages/admin/admin-stock/stock-mvt/stock-mvt.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' }, // Redirect to login by default
@@ -18,7 +20,7 @@ export const routes: Routes = [
     { path: 'loginMecano', component: LoginMecanoComponent },
     { path: 'register', component: RegisterComponent }, // Register Page
     { path: 'unauthorized', component: UnauthorizedComponent },
-   
+
     {
         path: '', component: LayoutComponent, children: [
             { path: 'home', component: HomeComponent },
@@ -30,7 +32,11 @@ export const routes: Routes = [
         path: 'admin', component: LayoutComponent, children: [
             { path: 'home', component: AdminHomeComponent},
             { path: 'settings', component: AdminSettingsComponent},
-            { path: '', redirectTo: 'home', pathMatch: 'full' }
-        ], canActivate : [authGuard]
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: 'stock',children:[
+                { path: 'actual' , component: StockActualComponent},
+                { path: 'mvt' , component: StockMvtComponent}
+            ] }
+        ]/*, canActivate : [authGuard]*/
     },
 ];
