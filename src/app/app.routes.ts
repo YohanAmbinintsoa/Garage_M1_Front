@@ -37,6 +37,6 @@ export const routes: Routes = [
                 { path: 'actual' , component: StockActualComponent},
                 { path: 'mvt' , component: StockMvtComponent}
             ] }
-        ]/*, canActivate : [authGuard]*/
+        ], canActivate : [authGuard]
     },
 ];
