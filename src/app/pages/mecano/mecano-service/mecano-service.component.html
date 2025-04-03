@@ -21,7 +21,7 @@
                         <td>{{ service.date }}</td>
                         <td>{{ service.client }}</td>
                         <td>{{ service.service }}</td>
-                        <td><a [routerLink]="['/mecano/details-service', 1758]">Go to Home</a></td>
+                        <td><a [routerLink]="['/mecano/details-service',  service.id]">Details</a></td>
                     </tr>
                 </ng-template>
                 <ng-template #emptymessage>

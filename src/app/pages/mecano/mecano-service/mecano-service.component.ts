@@ -20,9 +20,17 @@ export class MecanoServiceComponent implements OnInit {
   ngOnInit() {
     //function pour l'inti
     this.services = [    {
+      "id":"1",
       "date": "2025-10-13",
       "client":"Zoky mtapy",
       "service":"manasa"
-    }];
+    },
+    {
+      "id":"2",
+      "date": "2024-09-28",
+      "client":"Zoky mlamina",
+      "service":"manadio"
+    }
+  ];
   }
 }
