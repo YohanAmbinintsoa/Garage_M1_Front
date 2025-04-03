@@ -1,0 +1,41 @@
+<p-toast></p-toast>
+
+<p-card [style]="{ width: '100%', height:'100%' }">
+    <ng-template #header>
+        <div>
+            <h1 class="p-3 text-xl font-bold">Demander un Rendez-vous</h1>
+        </div>
+    </ng-template>
+    <form [formGroup]="rdvForm" class="w-full flex flex-col gap-2">
+        <div class="w-full grid grid-cols-2">
+            <div class="flex items-center gap-4 mb-4">
+                <label for="service">Service</label>
+                <p-select id="service" [options]="services" optionLabel="label" optionValue="value"
+                    formControlName="service" placeholder="Select a service"></p-select>
+            </div>
+            <div class="flex items-center gap-4 mb-4">
+                <label for="car">Car</label>
+                <p-select id="car" [options]="cars" optionLabel="label" optionValue="value" formControlName="car"
+                    placeholder="Select your car"></p-select>
+            </div>
+        </div>
+        <!-- RDV Date Picker -->
+        <div class="p-field">
+            <label for="rdvDate">RDV Date</label>
+            <p-calendar id="rdvDate" formControlName="rdvDate" [showIcon]="true"></p-calendar>
+        </div>
+
+        <!-- Remark -->
+        <div class="p-field">
+            <label for="remark">Remark</label>
+            <textarea id="remark" pInputTextarea formControlName="remark" rows="3"
+                placeholder="Enter a remark"></textarea>
+        </div>
+
+    </form>
+    <ng-template #footer>
+        <div class="flex gap-4 mt-1">
+            <p-button label="Demander" [disabled]="rdvForm.invalid" (click)="submitRDV()" class="w-full" styleClass="w-full" />
+        </div>
+    </ng-template>
+</p-card>
