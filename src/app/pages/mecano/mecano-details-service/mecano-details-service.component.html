@@ -1,0 +1,105 @@
+<p-toast></p-toast>
+
+<p-dialog [(visible)]="displayDialog" [modal]="true" [closable]="true"
+    [style]="{ width: '50rem' ,'min-height': '300px'}" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+    <ng-template pTemplate="header">
+        <div class="inline-flex items-center justify-center gap-2">
+            <span class="font-bold whitespace-nowrap">Ajout d'article</span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="body">
+        <form [formGroup]="addArticleForm" (ngSubmit)="addArticle()">
+            <div class="flex items-center gap-5 mt-2">
+                <p-select [options]="articles" optionLabel="designation" optionValue="id"
+                    placeholder="Article" class="w-64"></p-select>
+                    <input type="number" pInputText formControlName="quantity" min="1" placeholder="Quantity" class="w-24">
+            </div>
+        </form>
+    </ng-template>  
+    <ng-template pTemplate="footer">
+        <p-button label="Cancel" styleClass="p-button-text" severity="secondary" (click)="displayDialog = false"></p-button>
+        <p-button label="Ajouter" styleClass="p-button-outlined" severity="secondary" (click)="addArticle()"
+            [disabled]="addArticleForm.invalid"></p-button>
+    </ng-template>
+</p-dialog>
+<p-panel header="Details service">
+
+    <p-fieldset legend="Client">
+        <p class="m-0">
+            {{DetailsService.clientName}}
+        </p>
+    </p-fieldset>
+
+    <p-fieldset legend="Service Demandé">
+        <p class="m-0">
+            {{DetailsService.serviceDesignation}}
+        </p>
+    </p-fieldset>
+
+    <p-fieldset legend="Date Entrée">
+        <p class="m-0">
+            {{DetailsService.entryDate}}
+        </p>
+    </p-fieldset>
+
+    <p-fieldset legend="Remarque du Client">
+        <p class="m-0">
+            {{DetailsService.rmqClient}}
+        </p>
+    </p-fieldset>
+
+    <div class="flex gap-4 w-full">
+        <!-- Section Avancement -->
+        <div class="w-1/2 p-4 bg-white rounded-xl">
+            <p-fieldset legend="Avancement">
+                <form [formGroup]="advancementForm" (ngSubmit)="submitAdvancement()" class="flex flex-col items-center gap-4">
+                    <p-knob formControlName="actualAdvancement" size="150" readonly="true"></p-knob>
+                    <div class="flex gap-2 justify-center">
+                        <p-button icon="pi pi-plus" (click)="increaseAdvancement()" [disabled]="advancementForm.get('actualAdvancement')?.value >= 100"></p-button>
+                        <p-button icon="pi pi-minus" (click)="decreaseAdvancement()" [disabled]="advancementForm.get('actualAdvancement')?.value <= 0"></p-button>
+                    </div>
+                    <p-button label="Enregistrer" styleClass="p-button-outlined" severity="secondary" 
+                        [disabled]="advancementForm.invalid"></p-button>   
+                </form>        
+            </p-fieldset>
+        </div>
+    
+        <!-- Section Articles utilisés -->
+        <div class="w-1/2 p-4 bg-white rounded-xl">
+            <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                    <span class="text-xl font-bold">Article(s) utilisé(s)</span>
+                    <p-button icon="pi pi-plus" rounded raised (click)="displayDialog = true"></p-button>
+                </div>
+                
+                <div class="rounded-xl border">
+                    <p-table [value]="usedArticles" [paginator]="true" [rows]="5" responsiveLayout="scroll"
+                        [tableStyle]="{ 'min-height': '150px', 'border-radius':'12px' }" class="w-full">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Désignation</th>
+                                <th>Quantité</th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+    
+                        <ng-template pTemplate="body" let-usedArticle>
+                            <tr>
+                                <td>{{ usedArticle.designation }}</td>
+                                <td>
+                                    {{ usedArticle.quantity }}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template #emptymessage>
+                            <tr>
+                                <td [attr.colspan]="3" class="text-center">Pas de données.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</p-panel>
