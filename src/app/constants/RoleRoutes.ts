@@ -12,7 +12,10 @@ interface RoleRoutes {
       { name: 'Stock', icon:"pi pi-user", route:"/admin/stock/actual" },
       
     ],
-    mecano: [], 
+    mecano: [
+      { name: 'Accueil', icon:"pi pi-home", route:"/mecano/home" },
+      { name: 'Details-service', icon:"pi pi-briefcase", route:"/mecano/details-service/:id" },
+    ], 
     user: [
       { name: 'Accueil', icon:"pi pi-home", route:"/home" },
       { name: 'Services', icon:"pi pi-briefcase", route:"" },

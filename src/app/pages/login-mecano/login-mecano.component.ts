@@ -31,6 +31,7 @@ export class LoginMecanoComponent {
   errorMessage: string = ""
 
   onSubmit() {
+    this.router.navigate(['/mecano/home']);
     if (this.userForm.valid) {
       this.http.post(environment.API_URL + '/auth/login', this.userForm.value)
         .subscribe({

@@ -10,8 +10,11 @@ import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.componen
 import { AdminSettingsComponent } from './pages/admin/admin-settings/admin-settings.component';
 import { HomeComponent } from './pages/user/home/home.component';
 import { SettingsComponent } from './pages/user/settings/settings.component';
+import { MecanoServiceComponent } from './pages/mecano/mecano-service/mecano-service.component';
+import { MecanoDetailsServiceComponent } from './pages/mecano/mecano-details-service/mecano-details-service.component';
 import { StockActualComponent } from './pages/admin/admin-stock/stock-actual/stock-actual.component';
 import { StockMvtComponent } from './pages/admin/admin-stock/stock-mvt/stock-mvt.component';
+
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' }, // Redirect to login by default
@@ -38,5 +41,12 @@ export const routes: Routes = [
                 { path: 'mvt' , component: StockMvtComponent}
             ] }
         ], canActivate : [authGuard]
+    },
+    {
+        path: 'mecano', component: LayoutComponent, children: [
+            { path: 'home', component: MecanoServiceComponent},
+            { path: 'details-service/:id', component: MecanoDetailsServiceComponent},
+            { path: '', redirectTo: 'home', pathMatch: 'full' }
+        ]
     },
 ];

@@ -23,6 +23,7 @@
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/interaction": "^6.1.15",
     "@primeng/themes": "^19.0.9",
+    "chart": "^0.1.2",
     "chart.js": "^4.4.8",
     "ngx-cookie-service": "^19.1.2",
     "primeicons": "^7.0.0",
