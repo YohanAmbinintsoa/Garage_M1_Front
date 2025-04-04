@@ -1,69 +1,59 @@
-<section class="grid grid-cols-[75%_25%] w-full gap-2 p-2">
-    <div class="grid grid-rows-2 h-screen gap-2">
-        <div class="w-full flex flex-row gap-2">
-            <app-card class="w-1/2 bg-white [clip-path:inset(0%_round_40px)] flex flex-col" title="Projects Overview">
-                <div icon>
+<section class="grid grid-cols-[3fr_1fr] w-full gap-4 p-4 min-h-screen">
+    <!-- Left Column -->
+    <div class="grid grid-rows-2 h-full gap-4">
+        <div class="w-full flex flex-row gap-4">
+            <!-- Doughnut Chart Card -->
+            <app-card class="w-1/2 bg-white shadow-lg rounded-xl flex flex-col p-4" title="Projects Overview">
+                <div icon class="text-blue-500">
                     <i class="pi pi-arrow-up-right w-6 h-6"></i>
                 </div>
                 <div card-body>
-                    <p-chart type="doughnut" [data]="data" [options]="options" ></p-chart>
+                    <p-chart type="doughnut" [data]="data" [options]="options"></p-chart>
                 </div>
             </app-card>
-            <app-card class="w-1/2 bg-white [clip-path:inset(0%_round_40px)] flex flex-col" title="Projects Overview">
-                <div icon>
+
+            <!-- Line Chart Card -->
+            <app-card class="w-1/2 bg-white shadow-lg rounded-xl flex flex-col p-4" title="Projects Overview">
+                <div icon class="text-green-500">
                     <i class="pi pi-arrow-up-right w-6 h-6"></i>
                 </div>
                 <div card-body>
-                    <p-chart type="line" [data]="data" [options]="options" ></p-chart>
+                    <p-chart type="line" [data]="data" [options]="options"></p-chart>
                 </div>
             </app-card>
         </div>
-        <div class="bg-white [clip-path:inset(0%_round_40px)] flex flex-col">
 
+        <!-- Large Content Section -->
+        <div class="bg-white shadow-lg rounded-xl flex flex-col p-6">
+            <!-- Add your content here -->
         </div>
     </div>
-    <div class="flex flex-col items-center h-screen overflow-auto [clip-path:inset(0%_round_40px)] bg-white ">
-        <div class="flex flex-row justify-between p-3 w-full">
-            <h3 class="text-xl ">Rendez-vous</h3>
-            <button class="p-2 rounded-full border flex justify-center items-center">
+
+    <!-- Right Column (Sidebar) -->
+    <div class="flex flex-col items-center min-h-screen overflow-auto bg-white shadow-lg rounded-xl">
+        <!-- Header -->
+        <div class="flex flex-row justify-between p-4 w-full border-b">
+            <h3 class="text-xl font-semibold">Rendez-vous</h3>
+            <button class="p-2 rounded-full border flex justify-center items-center hover:bg-gray-100 transition">
                 <i class="pi pi-calendar"></i>
             </button>
         </div>
+    
+        <!-- Meetings List -->
         <div class="p-4 flex flex-col gap-3 w-full">
-            <div class="border rounded-2xl p-2">
+            <div *ngFor="let rdv of rdvs" class="border rounded-xl p-3 hover:shadow-md transition"
+                [ngClass]="{'bg-yellow-100 border-yellow-500': rdv.state === 0, 'bg-green-100 border-green-500': rdv.state === 5}">
                 <div class="flex flex-row w-full justify-between">
-                    <p>My meetings</p>
-                    <p>Mr Rakoto</p>
-                    <i class="pi pi-arrow-up-right"></i>
+                    <p class="font-medium">{{ rdv.service.designation }}</p>
+                    <p class="text-gray-500">{{ rdv.client.name }}</p>
+                    <i class="pi pi-arrow-up-right text-blue-500"></i>
                 </div>
-                <div class="">
-                    <p class="italic">
-                        Lundi 10 Mars 2025
-                    </p>
-                </div>
-            </div>
-            <div class="border rounded-2xl p-2">
-                <div class="flex flex-row w-full justify-between">
-                    <p>My meetings</p>
-                    <p>Mr Rakoto</p>
-                    <i class="pi pi-arrow-up-right"></i>
-                </div>
-                <div class="">
-                    <p class="italic">
-                        Lundi 10 Mars 2025
-                    </p>
-                </div>
-            </div>
-            <div class="border rounded-2xl p-2">
-                <div class="flex flex-row w-full justify-between">
-                    <p>My meetings</p>
-                    <p>Mr Rakoto</p>
-                    <i class="pi pi-arrow-up-right"></i>
-                </div>
-                <div class="">
-                    <p class="italic">
-                        Lundi 10 Mars 2025
-                    </p>
+                <p class="italic text-gray-600">{{ rdv.rdvDate | date:'EEEE dd MMMM yyyy' }}</p>
+    
+                <!-- Validation Form (Only if RDV is not validated) -->
+                <div *ngIf="rdv.state === 0" class="mt-2 flex justify-end">
+                    <button class="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+                        (click)="validateRdv(rdv._id)">Validate</button>
                 </div>
             </div>
         </div>

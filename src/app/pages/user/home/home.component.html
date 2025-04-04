@@ -1,9 +1,31 @@
-<div class="flex flex-col gap-3">
-    <!-- <section class="w-full grid grid-cols-2 gap-3">
-        <app-dynamic-crud [title]="'modeles'" [endpoint]="'carModels'" [fields]="carModel"></app-dynamic-crud>
-        <app-dynamic-crud [title]="'marques'" [endpoint]="'carBrands'" [fields]="carBrand"></app-dynamic-crud>
-    </section> -->
-    <section>
-        <app-dynamic-crud [title]="'voiture'" [endpoint]="'cars'" [fields]="car"></app-dynamic-crud>
-    </section>
-</div>
+<section class="w-full flex flex-col gap-3">
+    <div class="grid grid-cols-2 grid-rows-1 gap-3">
+    
+        <section class="w-full">
+            <app-dynamic-crud [title]="'voiture'" [endpoint]="'cars'" [fields]="car"></app-dynamic-crud>
+        </section>
+        <section class="h-full">
+            <app-rdv></app-rdv>
+         </section>
+    </div>
+    <div class="w-full p-4 bg-white rounded-xl"> 
+        <full-calendar [options]="calendarOptions"></full-calendar>
+
+        <p-dialog [(visible)]="displayDialog" header="RDV Details" [modal]="true" [closable]="true" [dismissableMask]="true">
+            <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+                <ng-template #title> {{ selectedRDV?.client }} </ng-template>
+                <ng-template #subtitle> Service: {{ selectedRDV?.title }} </ng-template>
+                <p>
+                    <strong>Car:</strong> {{ selectedRDV?.car }} <br />
+                    <strong>Date:</strong> {{ selectedRDV?.rdvDate  }} <br />
+                    <strong>Remark:</strong> {{ selectedRDV?.remark }}
+                </p>
+                <ng-template #footer>
+                    <div class="flex gap-4 mt-1">
+                        <p-button label="Close" severity="secondary" class="w-full" (click)="displayDialog = false" />
+                    </div>
+                </ng-template>
+            </p-card>
+        </p-dialog>
+    </div>
+</section>
